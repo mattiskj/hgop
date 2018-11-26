@@ -50,7 +50,7 @@ function getClient() {
 var client = getClient();
 client.connect((err) => {
     if (err) {
-        console.log('failed to connect to postgres!');
+        console.log('failevxcvdfd to connect to postgres!');
     } else {
         console.log('successfully connected to postgres!');
         client.query('CREATE TABLE IF NOT EXISTS Item (ID SERIAL PRIMARY KEY, Name VARCHAR(32) NOT NULL, InsertDate TIMESTAMP NOT NULL);', (err) => {
