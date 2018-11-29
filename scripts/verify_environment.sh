@@ -1,14 +1,17 @@
 #!/bin/bash
-rm -f "logfile.log"
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+rm -f "$SCRIPTPATH/logfile.log"
 getInfo(){
 	timeStarted=$(date)
 	echo Hello $USER
+	echo This script checks the version of all tools that are being used for thos project.
+	
 	#get the system info
 	echo System `uname -mrs`
 	echo
 
 	if hash git >/dev/null 2>&1; then
-		echo git version: `git --version`
+		echo git Version: `git --version`
 	else
 		echo git Not Installed
 	fi
@@ -23,6 +26,12 @@ getInfo(){
 		echo Npm Version: `npm --version`
 	else
 		echo Npm not installed
+	fi
+
+	if hash docker >/dev/null 2>&1; then
+		echo Docker Version: `docker --version`
+	else
+		echo Docker not installed
 	fi
 
 	if hash aws >/dev/null 2>&1; then
@@ -42,4 +51,4 @@ getInfo(){
 	echo This program started ad: $timeStarted
 	echo And ended on: `date`
 }
-getInfo | tee -a "logfile.log"
+getInfo | tee -a "$SCRIPTPATH/logfile.log"
