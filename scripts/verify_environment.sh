@@ -1,29 +1,45 @@
 #!/bin/bash
-rm -f "logfile.txt"
+rm -f "logfile.log"
 getInfo(){
-	
+	timeStarted=$(date)
 	echo Hello $USER
-	echo
-	echo starting time `date`
-	echo
 	#get the system info
 	echo System `uname -mrs`
 	echo
 
-	#get versions of dependencies
-	gitVersion=$(git --version)
-	npmVersion=$(npm --version)
-	nodeVersion=$(node --version)
-	awsCli=$(aws --version)
-	terraformVersion=$(terraform --version)
-	echo node version: $nodeVersion
-	echo git version : $gitVersion
-	echo npm version : $npmVersion
-	echo aws version : $awsCli
-	echo terraform version: $terraformVersion
+	if hash git >/dev/null 2>&1; then
+		echo git version: `git --version`
+	else
+		echo git Not Installed
+	fi
 
+	if hash node >/dev/null 2>&1; then
+		echo node Version: `node --version`
+	else
+		echo Node not installed
+	fi
+
+	if hash npm >/dev/null 2>&1; then
+		echo Npm Version: `npm --version`
+	else
+		echo Npm not installed
+	fi
+
+	if hash aws >/dev/null 2>&1; then
+		echo aws Version: `aws --version`
+	else
+		echo aws not installed
+	fi
+
+	if hash terraform >/dev/null 2>&1; then
+		echo Terraform Version: `terraform --version`
+	else
+		echo Terraform not installed
+	fi
+	echo
 
 	#displaying the end time
-	echo end time `date`
+	echo This program started ad: $timeStarted
+	echo And ended on: `date`
 }
-getInfo | tee -a "logfile.txt"
+getInfo | tee -a "logfile.log"
