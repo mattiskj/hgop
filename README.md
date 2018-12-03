@@ -21,6 +21,13 @@ If every needed file is present and the script is run from the root, it will fir
 This page should return an "`The API is running!`" message.
 ****
 
+## Jenkinks instance.
+
+Jenkins instance running on 
+````
+http://ec2-54-226-220-170.compute-1.amazonaws.com:8080
+````
+
 ## Folder structure
 ```
 .
