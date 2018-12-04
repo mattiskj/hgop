@@ -120,28 +120,22 @@ test('Get the players card (string or undefined)', () => {
 //test for get cardsValue
 test('return the sum of cards in deck', () => {
     let deck = deckConstructor();
-    deck = [
-        '03C', '02C', '04C'
-    ];
+    deck = [];
     let dealer = dealerConstructor();
     dealer.shuffle = (deck) => {};
     let game = lucky21Constructor(deck, dealer);
 
-    game.state.cards = game.state.deck;
-
+    game.state.cards = ['03C', '02C', '04C'];
     expect(game.getCardsValue(game)).toEqual(9);
 });
 test('return the sum of cards in deck', () => {
     let deck = deckConstructor();
-    deck = [
-        '05C', '09C', '02C'
-    ];
+    deck = [];
     let dealer = dealerConstructor();
     dealer.shuffle = (deck) => {};
     let game = lucky21Constructor(deck, dealer);
 
-    game.state.cards = game.state.deck;
-
+    game.state.cards = ['05C', '09C', '02C'];
     expect(game.getCardsValue(game)).toEqual(16);
 });
 
