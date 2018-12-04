@@ -78,11 +78,13 @@ module.exports = (deck, dealer) => {
         },
         // Player action (void).
         guess21OrUnder: (game) => {
-            // TODO
+            var nextCard = dealer.draw(deck);
+            game.state.cards.push(nextCard);
         },
         // Player action (void).
         guessOver21: (game) => {
-            // TODO
+            var nextCard = dealer.draw(deck);
+            game.state.card = nextCard;
         },
     };
 };
