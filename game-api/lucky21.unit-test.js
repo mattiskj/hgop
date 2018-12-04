@@ -230,7 +230,7 @@ test('Guess over 21 function', () => {
 test('check if the game is over', () => {
     let deck = deckConstructor();
     deck = [
-        '05C'
+        '02H'
     ];
     let dealer = dealerConstructor();
     dealer.shuffle = (deck) => {};
