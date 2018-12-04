@@ -36,10 +36,12 @@ module.exports = (deck, dealer) => {
         // The player's cards (array of strings).
         getCards: (game) => {
             // TODO
+
         },
         // The player's card (string or undefined).
         getCard: (game) => {
             // TODO
+
         },
         // Player action (void).
         guess21OrUnder: (game) => {
