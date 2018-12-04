@@ -126,3 +126,37 @@ test('Guess oveer 21 function', () => {
 
     expect(game.state.cards.length).toEqual(5);
 });
+
+//test is game over
+test('check if the game is over', () => {
+    let deck = deckConstructor();
+    deck = [
+        '05C'
+    ];
+    let dealer = dealerConstructor();
+    dealer.shuffle = (deck) => {};
+    let game = lucky21Constructor(deck, dealer);
+
+    game.state.cards = ['04C', '03C', '02C', '13C'];
+    expect(game.isGameOver(game)).toEqual(false);
+    game.guess21OrUnder(game);
+
+    expect(game.isGameOver(game)).toEqual(true);
+
+});
+
+//test if player has won
+test('check if player has won', () => {
+    let deck = deckConstructor();
+    deck = [
+        '04S'
+    ];
+    let dealer = dealerConstructor();
+    dealer.shuffle = (deck) => {};
+    let game = lucky21Constructor(deck, dealer);
+
+    game.state.cards = ['04C', '04H', '13C'];
+    game.guessOver21(game);
+
+    expect(game.playerWon(game)).toEqual(true);
+});
