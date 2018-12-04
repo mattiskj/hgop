@@ -24,7 +24,26 @@ module.exports = (deck, dealer) => {
         },
         // The highest score the cards can yield without going over 21 (integer).
         getCardsValue: (game) => {
-            // TODO
+            let hand = game.state.cards;
+            hand.sort();
+            hand.reverse();
+            let value = 0;
+            for(let i = 0; i < hand.length; i++) {
+                var integer = parseInt(hand[i], 10);
+                if(integer === 11 || integer === 12 || integer === 13){
+                    integer = 10;
+                }
+                if(integer === 1){
+                    if((value + 11) > 21){
+                        integer = 1;
+                    }
+                    else{
+                        integer = 11;
+                    }
+                }
+                value += integer;
+            }
+            return value;
         },
         // The value of the card that should exceed 21 if it exists (integer or undefined).
         getCardValue: (game) => {
