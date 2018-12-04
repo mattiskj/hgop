@@ -3,13 +3,17 @@ const dealerConstructor = require('./dealer.js');
 const lucky21Constructor = require('./lucky21.js');
 
 test('a new game should have 50 cards left in the deck', () => {
-  let game = lucky21Constructor();
-  expect(game.state.deck.length).toEqual(50);
+    let dealer = dealerConstructor();
+    let deck = deckConstructor();
+    let game = lucky21Constructor(deck, dealer);
+    expect(game.state.deck.length).toEqual(50);
 });
 
 test('a new game should have 2 drawn cards', () => {
-  let game = lucky21Constructor();
-  expect(game.state.cards.length).toEqual(2);
+    let dealer = dealerConstructor();
+    let deck = deckConstructor();
+    let game = lucky21Constructor(deck, dealer);
+    expect(game.state.cards.length).toEqual(2);
 });
 
 test('guess21OrUnder should draw the next card', () => {
@@ -169,9 +173,7 @@ test('returns the value of card in deck', () => {
 //Test for getTotal
 test('returns the sum of cards on hand and the next card in', () => {
     let deck = deckConstructor();
-    deck = [
-        '13C', '01H', '04C', '03C'
-    ];
+    deck = [];
     let dealer = dealerConstructor();
     dealer.shuffle = (deck) => {};
     let game = lucky21Constructor(deck, dealer);
@@ -182,16 +184,14 @@ test('returns the sum of cards on hand and the next card in', () => {
 });
 test('returns the sum of cards on hand and the next card in', () => {
     let deck = deckConstructor();
-    deck = [
-        '09C', '01H'
-    ];
+    deck = [];
     let dealer = dealerConstructor();
     dealer.shuffle = (deck) => {};
     let game = lucky21Constructor(deck, dealer);
     game.state.cards = ['13C', '01H', '04C'];
     game.state.card = '03C';
 
-    expect(game.getTotal(game)).toEqual(20);
+    expect(game.getTotal(game)).toEqual(18);
 });
 
 //test for Guess over 21

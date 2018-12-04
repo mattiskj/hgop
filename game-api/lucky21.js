@@ -48,15 +48,25 @@ module.exports = (deck, dealer) => {
         // The value of the card that should exceed 21 if it exists (integer or undefined).
         getCardValue: (game) => {
             let cardValue = game.state.card;
+            if(cardValue === undefined){
+                return cardValue;
+            }
             cardValue = parseInt(cardValue, 10);
             console.log(cardValue);
             if(cardValue === 11 || cardValue === 12 || cardValue === 13){
                 cardValue = 10;
             }
+            if(cardValue === 1){
+                cardValue = 11;
+            }
             return cardValue;
         },
         getTotal: (game) => {
-            // TODO
+            console.log("gameCard: " + game.getCardsValue(game));
+            if(game.getCardValue(game) === undefined) {
+                return game.getCardValue(game);
+            }
+            return game.getCardsValue(game) + game.getCardValue(game);
         },
         // The player's cards (array of strings).
         getCards: (game) => {
