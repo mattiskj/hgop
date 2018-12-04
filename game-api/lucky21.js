@@ -18,12 +18,14 @@ module.exports = (deck, dealer) => {
         isGameOver: (game) => {
             if(game.playerWon(game) === true){return true;}
             else if(game.state.card === undefined && game.getTotal(game) > 21){return true;}
-            else if(game.state.card !== undefined && game.getTotal(game) <= 21){return true;}
+            else if(game.state.card != undefined && game.getTotal(game) <= 21){return true;}
             return false;
         },
         // Has the player won (true or false).
         playerWon: (game) => {
-
+            if(game.state.card === undefined && game.getTotal(game) === 21){return true;}
+            else if(game.state.card != undefined && game.getTotal(game) > 21){return true;}
+            else{return false;}
         },
         // The highest score the cards can yield without going over 21 (integer).
         getCardsValue: (game) => {
@@ -33,6 +35,7 @@ module.exports = (deck, dealer) => {
             let value = 0;
             for(let i = 0; i < hand.length; i++) {
                 var integer = parseInt(hand[i], 10);
+                
                 if(integer === 11 || integer === 12 || integer === 13){
                     integer = 10;
                 }
@@ -55,7 +58,6 @@ module.exports = (deck, dealer) => {
                 return cardValue;
             }
             cardValue = parseInt(cardValue, 10);
-            console.log(cardValue);
             if(cardValue === 11 || cardValue === 12 || cardValue === 13){
                 cardValue = 10;
             }
@@ -65,10 +67,10 @@ module.exports = (deck, dealer) => {
             return cardValue;
         },
         getTotal: (game) => {
-            console.log("gameCard: " + game.getCardsValue(game));
             if(game.getCardValue(game) === undefined) {
-                return game.getCardValue(game);
+                return game.getCardsValue(game);
             }
+            
             return game.getCardsValue(game) + game.getCardValue(game);
         },
         // The player's cards (array of strings).
@@ -81,14 +83,15 @@ module.exports = (deck, dealer) => {
         },
         // Player action (void).
         guess21OrUnder: (game) => {
-            var nextCard = dealer.draw(deck);
+            const nextCard = dealer.draw(game.state.deck);
             game.state.card = undefined;
             game.state.cards.push(nextCard);
         },
         // Player action (void).
         guessOver21: (game) => {
-            var nextCard = dealer.draw(deck);
+            const nextCard = dealer.draw(game.state.deck);
             game.state.card = nextCard;
+            
         },
     };
 };

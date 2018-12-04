@@ -53,7 +53,7 @@ test('guess21OrUnder should draw the next card', () => {
     // Act
     game.guess21OrUnder(game);
     game.guess21OrUnder(game);
-    console.log(game.state.cards);
+
 
     // Assert
     expect(game.state.cards.length).toEqual(4);
@@ -115,7 +115,6 @@ test('Get the players card (string or undefined)', () => {
     let game = lucky21Constructor(deck, dealer);
 
     game.state.card = dealer.draw(deck);
-    console.log(game.state.card);
 
 
     expect(game.getCard(game)).toEqual(game.state.card);
@@ -143,6 +142,7 @@ test('return the sum of cards in deck', () => {
     expect(game.getCardsValue(game)).toEqual(16);
 });
 
+
 //test for getCardValue
 test('returns the value of card in deck', () => {
     let deck = deckConstructor();
@@ -168,6 +168,19 @@ test('returns the value of card in deck', () => {
     game.state.card = '01H';
 
     expect(game.getCardValue(game)).toEqual(11);
+});
+test('returns the value of card in deck', () => {
+    let deck = deckConstructor();
+    deck = [
+        '01H'
+    ];
+    let dealer = dealerConstructor();
+    dealer.shuffle = (deck) => {};
+    let game = lucky21Constructor(deck, dealer);
+
+    game.state.card = undefined;
+
+    expect(game.getCardValue(game)).toEqual(undefined);
 });
 
 //Test for getTotal
@@ -229,13 +242,10 @@ test('Guess over 21 function', () => {
 //test is game over
 test('check if the game is over', () => {
     let deck = deckConstructor();
-    deck = [
-        '02H'
-    ];
     let dealer = dealerConstructor();
-    dealer.shuffle = (deck) => {};
     let game = lucky21Constructor(deck, dealer);
-
+    game.state.deck = [ '03H' ];
+    
     game.state.cards = ['04C', '03C', '02C', '13C'];
     expect(game.isGameOver(game)).toEqual(false);
     game.guess21OrUnder(game);
@@ -243,31 +253,23 @@ test('check if the game is over', () => {
     expect(game.isGameOver(game)).toEqual(true);
 });
 test('check if the game is over', () => {
-    let deck = deckConstructor();
-    deck = [
-        '03C'
-    ];
     let dealer = dealerConstructor();
-    dealer.shuffle = (deck) => {};
+    let deck = deckConstructor();
     let game = lucky21Constructor(deck, dealer);
-
+    game.state.deck = [ '03H' ];
     game.state.cards = ['12C', '09C'];
+    
     expect(game.isGameOver(game)).toEqual(false);
     game.guessOver21(game);
-
     expect(game.isGameOver(game)).toEqual(true);
 });
 
 //test if player has won
 test('check if player has won', () => {
     let deck = deckConstructor();
-    deck = [
-        '04S'
-    ];
     let dealer = dealerConstructor();
-    dealer.shuffle = (deck) => {};
     let game = lucky21Constructor(deck, dealer);
-
+    game.state.deck = [ '04A' ];
     game.state.cards = ['04C', '04H', '13C'];
     game.guessOver21(game);
 
@@ -275,13 +277,9 @@ test('check if player has won', () => {
 });
 test('check if player has won', () => {
     let deck = deckConstructor();
-    deck = [
-        '04S'
-    ];
     let dealer = dealerConstructor();
-    dealer.shuffle = (deck) => {};
     let game = lucky21Constructor(deck, dealer);
-
+    game.state.deck = [ '04H' ];
     game.state.cards = ['04C', '04H'];
     game.guessOver21(game);
 
