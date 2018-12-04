@@ -65,4 +65,64 @@ test('Get the players card (string or undefined)', () => {
     expect(game.getCard(game)).toEqual(game.state.card);
 });
 
-//
+//test for get cardsValue
+test('return the sum of cards in deck', () => {
+    let deck = deckConstructor();
+    deck = [
+        '03C', '02C', '04C'
+    ];
+    let dealer = dealerConstructor();
+    dealer.shuffle = (deck) => {};
+    let game = lucky21Constructor(deck, dealer);
+
+    game.state.cards = game.state.deck;
+
+    expect(game.getCardsValue(game)).toEqual(9);
+});
+
+//test for getCardValue
+test('returns the value of card in deck', () => {
+    let deck = deckConstructor();
+    deck = [
+        '13C', '01H'
+    ];
+    let dealer = dealerConstructor();
+    dealer.shuffle = (deck) => {};
+    let game = lucky21Constructor(deck, dealer);
+
+    game.state.cards = game.state.deck[0];
+
+    expect(game.getCardValue(game)).toEqual(10);
+});
+
+//Test for getTotal
+test('returns the sum of cards on hand and the next card in', () => {
+    let deck = deckConstructor();
+    deck = [
+        '13C', '01H', '04C', '03C'
+    ];
+    let dealer = dealerConstructor();
+    dealer.shuffle = (deck) => {};
+    let game = lucky21Constructor(deck, dealer);
+    game.state.cards = ['13C', '01H', '04C'];
+    game.state.card = '03C';
+
+    expect(game.getTotal(game)).toEqual(18);
+});
+
+//test for Guess over 21
+test('Guess oveer 21 function', () => {
+    let deck = deckConstructor();
+    deck = [
+        '13C', '01H', '04C', '03C' , '02C', '05C'
+    ];
+    let dealer = dealerConstructor();
+    dealer.shuffle = (deck) => {};
+    let game = lucky21Constructor(deck, dealer);
+
+    game.state.cards = ['13C', '01H', '04C', '03C' , '02C'];
+    game.state.card = '05C';
+    game.guessOver21(game);
+
+    expect(game.state.cards.length).toEqual(5);
+});
