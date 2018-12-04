@@ -50,7 +50,7 @@ test('guess21OrUnder should draw the next card', () => {
     game.guess21OrUnder(game);
     game.guess21OrUnder(game);
     console.log(game.state.cards);
-    
+
     // Assert
     expect(game.state.cards.length).toEqual(4);
     expect(game.state.cards[3]).toEqual('05C');
@@ -112,7 +112,7 @@ test('Get the players card (string or undefined)', () => {
 
     game.state.card = dealer.draw(deck);
     console.log(game.state.card);
-    
+
 
     expect(game.getCard(game)).toEqual(game.state.card);
 });
@@ -143,26 +143,25 @@ test('return the sum of cards in deck', () => {
 test('returns the value of card in deck', () => {
     let deck = deckConstructor();
     deck = [
-        '13C', '01H'
-    ];
-    let dealer = dealerConstructor();
-    dealer.shuffle = (deck) => {};
-    let game = lucky21Constructor(deck, dealer);
-
-    game.state.cards = game.state.deck[0];
-
-    expect(game.getCardValue(game)).toEqual(10);
-});
-test('returns the value of card in deck', () => {
-    let deck = deckConstructor();
-    deck = [
         '01H'
     ];
     let dealer = dealerConstructor();
     dealer.shuffle = (deck) => {};
     let game = lucky21Constructor(deck, dealer);
 
-    game.state.cards = game.state.deck[0];
+    game.state.card = '13C';
+
+    expect(game.getCardValue(game)).toEqual(10);
+});
+test('returns the value of card in deck', () => {
+    let deck = deckConstructor();
+    deck = [
+    ];
+    let dealer = dealerConstructor();
+    dealer.shuffle = (deck) => {};
+    let game = lucky21Constructor(deck, dealer);
+
+    game.state.card = '01H';
 
     expect(game.getCardValue(game)).toEqual(11);
 });
