@@ -10,7 +10,7 @@ node {
         echo 'Installing depencies'
         /* need to get json file from game-api folder and then run install*/
         sh "cd game-api"
-        sh "npm install"
+        sh "yarn install"
     }
     stage("Build") {
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
