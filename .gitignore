@@ -10,6 +10,7 @@
 
 *.DS_Store
 *logfile.log
+*.log
 
 node_modules
 

@@ -12,6 +12,11 @@ node {
         sh "cd game-api"
         sh "npm install"
     }
+    stage("Lint test") {
+        echo 'checking code quality'
+        sh "cd game-api"
+        sh "npm run eslint"
+    }
     stage("Build") {
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
         sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
