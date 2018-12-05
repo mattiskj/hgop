@@ -15,6 +15,10 @@ node {
         echo 'checking code quality'
         sh "npm run eslint --prefix game-api"
     }
+    stage("Unit test") {
+        echo 'Unit testing'
+        sh "npm run test:unit --prefix game-api"
+    }
     stage("Build") {
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
         sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
