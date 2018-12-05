@@ -9,13 +9,11 @@ node {
     stage("Install") {
         echo 'Installing depencies'
         /* need to get json file from game-api folder and then run install*/
-        sh "cd game-api"
-        sh "npm install"
+        sh "npm install --prefix game-api"
     }
     stage("Lint test") {
         echo 'checking code quality'
-        sh "cd game-api"
-        sh "npm run eslint"
+        sh "npm run eslint --prefix game-api"
     }
     stage("Build") {
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
