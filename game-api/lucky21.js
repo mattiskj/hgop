@@ -1,4 +1,10 @@
-module.exports = (deck, dealer) => {
+module.exports = (context) => {
+    let deckConstructor = context('deck');
+    let deck = deckConstructor(context);
+
+    let dealerConstructor = context('dealer');
+    let dealer = dealerConstructor(context);
+
     dealer.shuffle(deck);
     let card0 = dealer.draw(deck);
     let card1 = dealer.draw(deck);
@@ -35,7 +41,7 @@ module.exports = (deck, dealer) => {
             let value = 0;
             for(let i = 0; i < hand.length; i++) {
                 var integer = parseInt(hand[i], 10);
-                
+
                 if(integer === 11 || integer === 12 || integer === 13){
                     integer = 10;
                 }
@@ -70,7 +76,7 @@ module.exports = (deck, dealer) => {
             if(game.getCardValue(game) === undefined) {
                 return game.getCardsValue(game);
             }
-            
+
             return game.getCardsValue(game) + game.getCardValue(game);
         },
         // The player's cards (array of strings).
@@ -91,7 +97,7 @@ module.exports = (deck, dealer) => {
         guessOver21: (game) => {
             const nextCard = dealer.draw(game.state.deck);
             game.state.card = nextCard;
-            
+
         },
     };
 };
