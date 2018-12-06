@@ -57,9 +57,11 @@ resource "aws_instance" "game_server" {
       private_key = "${file("~/.aws/GameKeyPair.pem")}"
     }
   }
-    provisioner "file" {
-    source      = "scripts/docker_compose_up.sh"
-    destination = "/home/ubuntu/docker_compose_up.sh"
+  # TODO Comment 1-2 sentences.
+  # The docker-compose.yml file will alse be placed on the virtual machine.
+  provisioner "file" {
+    source      = "docker-compose.yml"
+    destination = "/home/ubuntu/docker-compose.yml"
 
     connection {
       type        = "ssh"
@@ -67,11 +69,9 @@ resource "aws_instance" "game_server" {
       private_key = "${file("~/.aws/GameKeyPair.pem")}"
     }
   }
-  # TODO Comment 1-2 sentences.
-  # The docker-compose.yml file will alse be placed on the virtual machine.
   provisioner "file" {
-    source      = "docker-compose.yml"
-    destination = "/home/ubuntu/docker-compose.yml"
+    source      = "scripts/docker_compose_up.sh"
+    destination = "/home/ubuntu/docker_compose_up.sh"
 
     connection {
       type        = "ssh"
@@ -90,7 +90,7 @@ resource "aws_instance" "game_server" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /home/ubuntu/initialize_game_api_instance.sh",
-      "chomd +x /home/ubuntu/docker_compose_up.sh"
+      "chmod +x /home/ubuntu/docker_compose_up.sh"
     ]
 
     connection {
