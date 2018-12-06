@@ -9,6 +9,6 @@ COPY database.js database.js
 # copies app.js from itemrepository and adds them to the container
 COPY app.js app.js
 # install all necessary dependencies
-RUN npm install
+RUN npm install --production
 #run node app.js on docker run
 CMD node app.js
