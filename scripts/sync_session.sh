@@ -1,6 +1,6 @@
 #!/bin/bash
 
-JENKINS_URL= "http://ec2-54-226-220-170.compute-1.amazonaws.com:8080"
+JENKINS_URL="ec2-54-226-220-170.compute-1.amazonaws.com"
 
 scp -o StrictHostKeyChecking=no -i "~/.aws/JenkinsAWSKeyPair.pem" ~/.aws/credentials ubuntu@${JENKINS_URL}:~/credentials
 ssh -o StrictHostKeyChecking=no -i "~/.aws/JenkinsAWSKeyPair.pem" ubuntu@${JENKINS_URL} "sudo mv ~/credentials /var/lib/jenkins/.aws/credentials"
