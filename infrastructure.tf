@@ -57,6 +57,16 @@ resource "aws_instance" "game_server" {
       private_key = "${file("~/.aws/GameKeyPair.pem")}"
     }
   }
+    provisioner "file" {
+    source      = "scripts/docker_compose_up.sh"
+    destination = "/home/ubuntu/docker_compose_up.sh"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file("~/.aws/GameKeyPair.pem")}"
+    }
+  }
   # TODO Comment 1-2 sentences.
   # The docker-compose.yml file will alse be placed on the virtual machine.
   provisioner "file" {
