@@ -29,4 +29,3 @@ if [ ! -f ~/docker-compose.yml ]; then
 fi
 
 echo 'Starting the API'
-sudo docker-compose up -d

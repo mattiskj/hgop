@@ -1,15 +1,12 @@
 const dealerConstructor = require('./dealer.js');
 
-test('dealer should should shuffle cards', () => {
+test('dealer should should draw 2 cards', () => {
   // Arrange
   const deck = ['a', 'b', 'c'];
   const dealer = dealerConstructor();
-
   // Act
-  dealer.shuffle(deck, () => {
-    return 0.99;
-  });
-
+  dealer.draw(deck);
+  dealer.draw(deck);
   // Assert
-  expect(deck).toEqual(['c', 'b', 'a']);
+  expect(deck.length).toEqual(1);
 });
