@@ -20,13 +20,14 @@ If every needed file is present and the script is run from the root, it will fir
 ```
 This page should return an "`The API is running!`" message.
 ****
-
+# Week 2
 ## Jenkinks instance.
 
 Jenkins instance running on 
 ````
 http://ec2-54-226-220-170.compute-1.amazonaws.com:8080
 ````
+Teachers have been given access to jenkins, username and password will be provided in comments on canvas.
 
 
 ## Folder structure
@@ -40,14 +41,33 @@ http://ec2-54-226-220-170.compute-1.amazonaws.com:8080
 │       └── answers.md
 ├── docker-compose.yml
 ├── infrastructure.tf
-├── itemrepository
-│   ├── Dockerfile
-│   ├── app.js
-│   ├── database.js
-│   └── package.json
+├── Jenksinsfile
+├── game-api
+│   ├── .eslintrc.json
+│   ├── app.js
+│   ├── server.js
+│   ├── config.js
+│   ├── random.js
+│   ├── random.unit-test.js
+│   ├── deck.js
+│   ├── deck.unit-test.js
+│   ├── dealer.js
+│   ├── dealer.unit-test.js
+│   ├── lucky21.js
+│   ├── lucky21.unit-test.js
+│   ├── inject.js
+│   ├── context.js
+│   ├── database.js
+│   ├── Dockerfile
+│   └── package.json
 └── scripts
-   ├── deploy.sh
-   ├── initialize_game_api_instance.sh
-   └── verify_environment.sh
+   ├── initialize_game_api_instance.sh
+   ├── verify_environment.sh
+   ├── docker_compose_up.sh
+   ├── docker_build.sh
+   ├── docker_push.sh
+   ├── sync_session.sh
+   └── deploy.sh
 
 ```
+
