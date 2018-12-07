@@ -27,9 +27,15 @@ Jenkins instance running on
 ````
 http://ec2-54-226-220-170.compute-1.amazonaws.com:8080
 ````
-Teachers have been given access to jenkins, username and password will be provided in comments on canvas.
-
-
+Teachers have been given access to jenkins, username and password will be provided in comments on canvas.  
+  
+The ip addresss of the running instance changes with every commit to github, so the latest instance can be found by:  
+1. log into jenkins using the provided username and password
+2. Click on the "Deployment" pipline
+3. Find the latest working build
+4. Click Console output
+5. Search for "Game API running at"
+****
 ## Folder structure
 ```
 .
