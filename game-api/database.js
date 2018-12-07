@@ -75,7 +75,7 @@ module.exports = function(context) {
 				card: this.getCard(game),
 				finished: this.isGameOver(game),
 				// TODO
-			}
+			};
 		},
 	};
 };
