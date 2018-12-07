@@ -1,6 +1,6 @@
 module.exports = function(context) {
 	const express = context('express');
-	const databaseConstructor = context("database");
+	const databaseConstructor = context('database');
 	const database = databaseConstructor(context);
 	const configConstructor = context('config');
 	const config = configConstructor(context);
