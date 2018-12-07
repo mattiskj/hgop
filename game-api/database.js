@@ -69,5 +69,13 @@ module.exports = function(context) {
 			onSuccess(0);
 			// TODO week 3
 		},
+		getState: (game) => {
+			return {
+				cards: this.getCards(game),
+				card: this.getCard(game),
+				finished: this.isGameOver(game),
+				// TODO
+			}
+		},
 	};
 };
