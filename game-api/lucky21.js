@@ -106,5 +106,14 @@ module.exports = (context) => {
 			const nextCard = dealer.draw(game.state.deck);
 			game.state.card = nextCard;
 		},
+		// Get State
+		getState: (game) => {
+			return {
+				cards: game.getCards(game),
+				card: game.getCard(game),
+				finished: game.isGameOver(game),
+				// TODO
+			};
+		},
 	};
 };
