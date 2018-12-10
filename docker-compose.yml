@@ -1,6 +1,6 @@
 version: '3'
 services:
-  my_item_repository:
+  my_game_api:
     image: mattiskj/hgop:${GIT_COMMIT}
     ports:
     - '3000:3000'
