@@ -40,7 +40,7 @@ module.exports = function(context) {
 					client.end();
 				} else {
 					const query = {
-						text: 'INSERT INTO GameResult(Won, Score, Total, InsertedDate) VALUES($1, $2, $3, CURRENT_TIMESTAMP);',
+						text: 'INSERT INTO GameResult(Won, Score, Total, InsertDate) VALUES($1, $2, $3, CURRENT_TIMESTAMP);',
 						values: [won, score, total],
 					};
 					client.query(query, (err) => {
@@ -65,11 +65,12 @@ module.exports = function(context) {
 					const query = {
 						text: 'SELECT COUNT(*) FROM GameResult;'
 					};
-					client.query(query, (err) => {
+					client.query(query, (err, res) => {
+						console.log("totalNumbers res")
 						if (err) {
 							onError();
 						} else {
-							onSuccess();
+							onSuccess(res.rows[0].count);
 						}
 						client.end();
 					})
@@ -86,13 +87,14 @@ module.exports = function(context) {
 					client.end();
 				} else {
 					const query = {
-						text: 'SELECT COUNT(*) FROM GameResult h where h.Won = "True"'
+						text: 'SELECT COUNT(*) FROM GameResult h where h.Won = True'
 					};
-					client.query(query, (err) => {
+					client.query(query, (err, res) => {
+						console.log("totalwin res")
 						if (err) {
 							onError();
 						} else {
-							onSuccess();
+							onSuccess(res.rows[0].count);
 						}
 						client.end();
 					})
@@ -109,13 +111,14 @@ module.exports = function(context) {
 					client.end();
 				} else {
 					const query = {
-						text: 'SELECT COUNT(*) FROM GameResult h WHERE h.total = 21'
+						text: 'SELECT COUNT(*) FROM GameResult h WHERE h.Score = 21'
 					};
-					client.query(query, (err) => {
+					client.query(query, (err, res) => {
+						console.log("totalNumbers res")
 						if (err) {
 							onError();
 						} else {
-							onSuccess();
+							onSuccess(res.rows[0].count);
 						}
 						client.end();
 					})
