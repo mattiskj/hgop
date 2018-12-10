@@ -30,6 +30,7 @@ module.exports = function(context) {
 		}
 	});
 
+
 	return {
 		insertResult: (won, score, total, onSuccess, onError) => {
 			const client = getClient();
@@ -39,7 +40,7 @@ module.exports = function(context) {
 					client.end();
 				} else {
 					const query = {
-						text: 'INSERT INTO History(Won, Score, Total, InsertedDate) VALUES($1, $2, $3, CURRENT_TIMESTAMP);',
+						text: 'INSERT INTO GameResult(Won, Score, Total, InsertedDate) VALUES($1, $2, $3, CURRENT_TIMESTAMP);',
 						values: [won, score, total],
 					};
 					client.query(query, (err) => {
@@ -62,7 +63,7 @@ module.exports = function(context) {
 					client.end();
 				} else {
 					const query = {
-						text: 'SELECT COUNT(*) FROM History;'
+						text: 'SELECT COUNT(*) FROM GameResult;'
 					};
 					client.query(query, (err) => {
 						if (err) {
@@ -85,7 +86,7 @@ module.exports = function(context) {
 					client.end();
 				} else {
 					const query = {
-						text: 'SELECT COUNT(*) FROM History h where h.Won = "True"'
+						text: 'SELECT COUNT(*) FROM GameResult h where h.Won = "True"'
 					};
 					client.query(query, (err) => {
 						if (err) {
@@ -108,7 +109,7 @@ module.exports = function(context) {
 					client.end();
 				} else {
 					const query = {
-						text: 'SELECT COUNT(*) FROM History h WHERE h.total = 21'
+						text: 'SELECT COUNT(*) FROM GameResult h WHERE h.total = 21'
 					};
 					client.query(query, (err) => {
 						if (err) {
@@ -121,7 +122,7 @@ module.exports = function(context) {
 				}
 			});
 			return;
-			// TODO week 3		
+			// TODO week 3
 		},
 	};
 };
