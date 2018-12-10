@@ -1,6 +1,9 @@
 # TODO Comment 2-3 sentences.
 # Here we collect the credentials from the aws file.
 # we collent the access key, secret access key and session token from the user that runs the file.
+variable "environment" {
+  type = "string"
+}
 provider "aws" {
   shared_credentials_file = "~/.aws/credentials"
   region                  = "us-east-1"
@@ -11,7 +14,7 @@ provider "aws" {
 # This security group can be seen on the aws console app.
 
 resource "aws_security_group" "game_security_group" {
-  name   = "GameSecurityGroup"
+  name   = "GameServer_${var.environment}"
 
   ingress {
     from_port   = 22
@@ -43,7 +46,7 @@ resource "aws_instance" "game_server" {
   key_name               = "GameKeyPair"
   vpc_security_group_ids = ["${aws_security_group.game_security_group.id}"]
   tags {
-    Name = "GameServer"
+    Name = "GameSecurityGroup_${var.environment}"
   }
   # TODO Comment 1-2 sentences.
   # The initialize_game_api_instance script will be placed in the virtual machine so it will be able to run in that machine and initialize the instance
