@@ -32,7 +32,7 @@ node {
         sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
     }
     // This should run api test on a staging server.
-    //build job: 'Api-test', parameters: [[$class: 'StringParameterValue', name: 'GIT_COMMIT', value: "${git.GIT_COMMIT}"]]
+    build job: 'ApiTest', parameters: [[$class: 'StringParameterValue', name: 'GIT_COMMIT', value: "${git.GIT_COMMIT}"]]
 
     // This should deploy the server to producction server.
     build job: 'Deployment', parameters: [[$class: 'StringParameterValue', name: 'GIT_COMMIT', value: "${git.GIT_COMMIT}"]]
