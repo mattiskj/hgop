@@ -18,6 +18,14 @@ node {
     stage("Unit test") {
         echo 'Unit testing'
         sh "npm run test:unit --prefix game-api"
+        step([
+            $class: 'CloverPublisher',
+            cloverReportDir: 'coverage',
+            cloverReportFileName: 'clover.xml',
+            healthyTarget: [methodCoverage: 80, conditionalCoverage: 80, statementCoverage: 80],
+            unhealthyTarget: [methodCoverage: 50, conditionalCoverage: 50, statementCoverage: 50],
+            failingTarget: [methodCoverage: 0, conditionalCoverage: 0, statementCoverage: 0]
+        ])
     }
     stage("Build") {
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
