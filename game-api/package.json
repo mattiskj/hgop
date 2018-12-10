@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test:unit": "jest || true",
+    "test:unit": "jest --coverage|| true",
     "eslint": "node ./node_modules/eslint/bin/eslint.js *.js"
   },
   "author": "",

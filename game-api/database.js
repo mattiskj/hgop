@@ -56,18 +56,72 @@ module.exports = function(context) {
 		},
 		// Should call onSuccess with integer.
 		getTotalNumberOfGames: (onSuccess, onError) => {
-			onSuccess(0);
+			let client = getClient();
+			client.connect((err) => {
+				if (err) {
+					client.end();
+				} else {
+					const query = {
+						text: 'SELECT COUNT(*) FROM History;'
+					};
+					client.query(query, (err) => {
+						if (err) {
+							onError();
+						} else {
+							onSuccess();
+						}
+						client.end();
+					})
+				}
+			});
+			return;
 			// TODO week 3
 		},
 		// Should call onSuccess with integer.
 		getTotalNumberOfWins: (onSuccess, onError) => {
-			onSuccess(0);
+			let client = getClient();
+			client.connect((err) => {
+				if (err) {
+					client.end();
+				} else {
+					const query = {
+						text: 'SELECT COUNT(*) FROM History h where h.Won = "True"'
+					};
+					client.query(query, (err) => {
+						if (err) {
+							onError();
+						} else {
+							onSuccess();
+						}
+						client.end();
+					})
+				}
+			});
+			return;
 			// TODO week 3
 		},
 		// Should call onSuccess with integer.
 		getTotalNumberOf21: (onSuccess, onError) => {
-			onSuccess(0);
-			// TODO week 3
+			let client = getClient();
+			client.connect((err) => {
+				if (err) {
+					client.end();
+				} else {
+					const query = {
+						text: 'SELECT COUNT(*) FROM History h WHERE h.total = 21'
+					};
+					client.query(query, (err) => {
+						if (err) {
+							onError();
+						} else {
+							onSuccess();
+						}
+						client.end();
+					})
+				}
+			});
+			return;
+			// TODO week 3		
 		},
 	};
 };
