@@ -43,43 +43,35 @@ module.exports = (context) => {
 		},
 		// The highest score the cards can yield without going over 21 (integer).
 		getCardsValue: (game) => {
-			const hand = game.state.cards;
-			hand.sort();
-			hand.reverse();
-			let value = 0;
-			for (let i = 0; i < hand.length; i++) {
-				let integer = parseInt(hand[i], 10);
-
-				if (integer === 11 || integer === 12 || integer === 13) {
-					integer = 10;
-				}
-				if (integer === 1) {
-					if ((value + 11) > 21) {
-						integer = 1;
-					} else {
-						integer = 11;
-					}
-				}
-				value += integer;
+			let cardsValue = 0;
+	  
+			// count everything and treat all aces as 1.
+			for (let i = 0; i < game.state.cards.length; i++) {
+			  const cardValue = parseInt(game.state.cards[i].substring(0, 2));
+			  cardsValue += Math.min(cardValue, 10);
 			}
-			return value;
-		},
+	  
+			// foreach ace check if we can add 10.
+			for (let i = 0; i < game.state.cards.length; i++) {
+			  const cardValue = parseInt(game.state.cards[i].substring(0, 2));
+			  if (cardValue == 1) {
+				if (cardsValue + 10 <= 21) {
+				  cardsValue += 10;
+				}
+			  }
+			}
+	  
+			return cardsValue;
+		  },
 		// The value of the card that should exceed 21
 		// if it exists (integer or undefined).
 		getCardValue: (game) => {
-			let cardValue = game.state.card;
-			if (cardValue === undefined) {
-				return cardValue;
-			}
-			cardValue = parseInt(cardValue, 10);
-			if (cardValue === 11 || cardValue === 12 || cardValue === 13) {
-				cardValue = 10;
-			}
-			if (cardValue === 1) {
-				cardValue = 11;
-			}
-			return cardValue;
-		},
+			const card = game.state.card;
+			if (card === undefined) return card;
+	  
+			const cardValue = parseInt(card.substring(0, 2));
+			return Math.min(cardValue, 10);
+		  },
 		getTotal: (game) => {
 			if (game.getCardValue(game) === undefined) {
 				return game.getCardsValue(game);
