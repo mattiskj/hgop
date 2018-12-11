@@ -25,7 +25,6 @@ services:
     - '4000:4000'
     environment:
       PORT: 4000
-      API_URL: ${API_URL}
 
 
 
