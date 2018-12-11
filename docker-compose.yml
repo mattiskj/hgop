@@ -1,11 +1,12 @@
 version: '3'
 services:
   my_game_api:
-    image: mattiskj/hgop:${GIT_COMMIT}
+    image: mattiskj/hgop:api${GIT_COMMIT}
     ports:
     - '3000:3000'
     depends_on:
     - my_database_container
+    - my_client_container
     environment:
       PORT: 3000
       POSTGRES_HOST: 'my_database_container'
@@ -18,3 +19,13 @@ services:
       POSTGRES_DB: 'game_database'
       POSTGRES_USER: 'my_user'
       POSTGRES_PASSWORD: 'my_password'
+  my_client_container:
+    image: mattiskj/hgop:client1.4
+    ports:
+    - '4000:4000'
+    environment:
+      PORT: 4000
+      API_URL: ${API_URL}
+
+
+
