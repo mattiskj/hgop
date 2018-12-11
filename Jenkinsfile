@@ -31,8 +31,11 @@ node {
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
         sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
     }
-    // This should run api test on a staging server.
+    // This triggers ApiTest project to build and run api test on a staging server and the destroy it.
     build job: 'ApiTest', parameters: [[$class: 'StringParameterValue', name: 'GIT_COMMIT', value: "${git.GIT_COMMIT}"]]
+    
+    // The triggers CapacityTtest project to build and run api test on a staging server and then destroy it.
+    build job: 'CapacityTest', parameters: [[$class: 'StringParameterValue', name: 'GIT_COMMIT', value: "${git.GIT_COMMIT}"]]
 
     // This should deploy the server to producction server.
     build job: 'Deployment', parameters: [[$class: 'StringParameterValue', name: 'GIT_COMMIT', value: "${git.GIT_COMMIT}"]]
