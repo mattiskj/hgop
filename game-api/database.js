@@ -12,29 +12,12 @@ module.exports = function(context) {
 			database: config.pgDatabase,
 		});
 	}
-
-
-	setTimeout(() => {
-		const client = getClient();
-
-
+	let client = getClient();
+	setTimeout(() =>
 		client.connect((err) => {
-			if (err) {
-				console.log('failed to connect to postgres!');
-			} else {
-				console.log('successfully connected to postgres!');
-				client.query('CREATE TABLE IF NOT EXISTS GameResult (ID SERIAL PRIMARY KEY, Won BOOL NOT NULL, Score INT NOT NULL, Total INT NOT NULL, InsertDate TIMESTAMP NOT NULL);', (err) => {
-					if (err) {
-						console.log('error creating game result table!');
-					} else {
-						console.log('successfully created game result table!');
-					}
-					client.end();
-				});
-			}
-		});
-	},10000);
-
+			if (err) console.log('failed to connect to postgres!');
+			else console.log('successfully connected to postgres!');
+		}), 10000);
 
 	return {
 		insertResult: (won, score, total, onSuccess, onError) => {
@@ -45,7 +28,7 @@ module.exports = function(context) {
 					client.end();
 				} else {
 					const query = {
-						text: 'INSERT INTO GameResult(Won, Score, Total, InsertDate) VALUES($1, $2, $3, CURRENT_TIMESTAMP);',
+						text: 'INSERT INTO "GameResult" ("Won", "Score", "Total", "InsertDate") VALUES($1, $2, $3, CURRENT_TIMESTAMP);',
 						values: [won, score, total],
 					};
 					client.query(query, (err) => {
@@ -68,7 +51,7 @@ module.exports = function(context) {
 					client.end();
 				} else {
 					const query = {
-						text: 'SELECT COUNT(*) FROM GameResult;'
+						text: 'SELECT COUNT(*) FROM "GameResult";'
 					};
 					client.query(query, (err, res) => {
 						console.log("totalNumbers res")
@@ -92,7 +75,7 @@ module.exports = function(context) {
 					client.end();
 				} else {
 					const query = {
-						text: 'SELECT COUNT(*) FROM GameResult h where h.Won = True'
+						text: 'SELECT COUNT(*) FROM "GameResult" where "Won" = True'
 					};
 					client.query(query, (err, res) => {
 						console.log("totalwin res")
@@ -116,7 +99,7 @@ module.exports = function(context) {
 					client.end();
 				} else {
 					const query = {
-						text: 'SELECT COUNT(*) FROM GameResult h WHERE h.Score = 21'
+						text: 'SELECT COUNT(*) FROM "GameResult" WHERE "Score" = 21'
 					};
 					client.query(query, (err, res) => {
 						console.log("totalNumbers res")

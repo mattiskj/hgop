@@ -22,6 +22,9 @@
 		"comma-dangle": 0,
 		"eol-last": 0,
 		"quotes": 0,
+		"object-curly-spacing": 0,
+		"no-var": 0,
+		"valid-jsdoc": 0,
 		"comma-spacing": 0
 	}
 }

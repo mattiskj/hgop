@@ -149,7 +149,7 @@ test('returns the value of card in deck', () => {
 
 	game.state.card = '01H';
 
-	expect(game.getCardValue(game)).toEqual(11);
+	expect(game.getCardValue(game)).toEqual(1);
 });
 test('returns the value of card in deck', () => {
 	dependencies.deck = () =>[
