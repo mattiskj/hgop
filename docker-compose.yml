@@ -19,7 +19,7 @@ services:
       POSTGRES_USER: 'my_user'
       POSTGRES_PASSWORD: 'my_password'
   my_client_container:
-    image: mattiskj/hgop:client1.4
+    image: mattiskj/hgop:game-client2.0
     ports:
     - '4000:4000'
     depends_on:
