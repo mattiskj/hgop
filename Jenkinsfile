@@ -30,6 +30,8 @@ node {
     stage("Build") {
         sh "./scripts/docker_build.sh ${git.GIT_COMMIT}"
         sh "./scripts/docker_push.sh ${git.GIT_COMMIT}"
+        sh "./scripts/docker_build_ui.sh ${git.GIT_COMMIT}"
+        sh "./scripts/docker_push_ui.sh ${git.GIT_COMMIT}"
     }
     // This triggers ApiTest project to build and run api test on a staging server and the destroy it.
     build job: 'ApiTest', parameters: [[$class: 'StringParameterValue', name: 'GIT_COMMIT', value: "${git.GIT_COMMIT}"]]
