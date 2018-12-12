@@ -1,7 +1,7 @@
 import axios from "axios";
 // TODO: Add correct api Url
-const apiUrl = `${ process.env.API_URL }:${ process.env.API_PORT }`;
-
+// const apiUrl = `${ process.env.API_URL }:${ process.env.API_PORT }`;
+  const apiUrl = process.env.API_URL;
 export const startGame = () => {
   // TODO: Call start game
 
