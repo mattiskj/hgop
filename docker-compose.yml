@@ -2,11 +2,10 @@ version: '3'
 services:
   my_client:
     image: mattiskj/hgop:client2.1
-    ports:
-    - '4000:4000'
     depends_on:
       - my_api
     environment:
+      PORT: 4000
       API_PORT: 3000
       API_URL: ${API_URL}
   my_api:
