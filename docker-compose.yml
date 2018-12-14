@@ -33,6 +33,7 @@ services:
     environment:
       - DD_API_KEY=091b1abb9d0d87a3f6d1a8bb71496cd4
       - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
+      - DD_TAGS=env:${ENVIRONMENT}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /proc/:/host/proc/:ro
