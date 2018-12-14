@@ -8,7 +8,8 @@ const server = require('./server.js');
 const inject = require('./inject.js');
 const random = require('./random.js')();
 const config = require('./config.js');
-
+const hotshots = require('hot-shots');
+const statsD = require('./statsD.js');
 module.exports = {
 	newContext: () => {
 		return inject({
@@ -21,6 +22,8 @@ module.exports = {
 			'server': server,
 			'random': random,
 			'config': config,
+			'hotshots': hotshots,
+			'statsD': statsD
 		});
 	},
 };

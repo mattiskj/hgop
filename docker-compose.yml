@@ -28,7 +28,15 @@ services:
       POSTGRES_DB: 'game_database'
       POSTGRES_USER: 'my_user'
       POSTGRES_PASSWORD: 'my_password'
-
+  my_datadog_container:
+    image: datadog/agent:latest
+    environment:
+      - DD_API_KEY=091b1abb9d0d87a3f6d1a8bb71496cd4
+      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
 
 
 
