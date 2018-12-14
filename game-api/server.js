@@ -111,10 +111,10 @@ module.exports = function(context) {
 					database.insertResult(won, score, total, () => {
 						// console.log('Game result inserted to database');
 						statsD.increment('games.finnished');
-						if(total === 21){
+						if (total === 21) {
 							statsD.increment('games.toal21');
-						}
-						if(won === true) {
+						};
+						if (won === true) {
 							statsD.increment('games.playerWon');
 						}
 					}, (err) => {
@@ -147,10 +147,10 @@ module.exports = function(context) {
 					database.insertResult(won, score, total, () => {
 						// console.log('Game result inserted to database');
 						statsD.increment('games.finnished');
-						if(total === 21){
+						if (total === 21) {
 							statsD.increment('games.toal21');
 						}
-						if(won === true) {
+						if (won === true) {
 							statsD.increment('games.playerWon');
 						}
 					}, (err) => {
