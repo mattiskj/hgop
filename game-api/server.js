@@ -5,7 +5,7 @@ module.exports = function(context) {
 	const configConstructor = context('config');
 	const config = configConstructor(context);
 	const lucky21Constructor = context('lucky21');
-	const statsDConstructor = contex('statsD');
+	const statsDConstructor = context('statsD');
 	const statsD = statsDConstructor(context);
 
 	const app = express();
