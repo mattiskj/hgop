@@ -5,6 +5,8 @@ module.exports = function(context) {
 	const configConstructor = context('config');
 	const config = configConstructor(context);
 	const lucky21Constructor = context('lucky21');
+	const statsDConstructor = contex('statsD');
+	const statsD = statsDConstructor(context);
 
 	const app = express();
 
@@ -70,6 +72,7 @@ module.exports = function(context) {
 				const score = game.getCardsValue(game);
 				const total = game.getTotal(game);
 				database.insertResult(won, score, total, () => {
+					statsD.increment('games.started');
 					// console.log('Game result inserted to database');
 				}, (err) => {
 					console.log('Failed to insert game result, Error:' + JSON.stringify(err));
@@ -107,6 +110,13 @@ module.exports = function(context) {
 					const total = game.getTotal(game);
 					database.insertResult(won, score, total, () => {
 						// console.log('Game result inserted to database');
+						statsD.increment('games.finnished');
+						if(total === 21){
+							statsD.increment('games.toal21');
+						}
+						if(won === true) {
+							statsD.increment('games.playerWon');
+						}
 					}, (err) => {
 						console.log('Failed to insert game result, Error:' + JSON.stringify(err));
 					});
@@ -136,6 +146,13 @@ module.exports = function(context) {
 					const total = game.getTotal(game);
 					database.insertResult(won, score, total, () => {
 						// console.log('Game result inserted to database');
+						statsD.increment('games.finnished');
+						if(total === 21){
+							statsD.increment('games.toal21');
+						}
+						if(won === true) {
+							statsD.increment('games.playerWon');
+						}
 					}, (err) => {
 						console.log('Failed to insert game result, Error:' + JSON.stringify(err));
 					});
