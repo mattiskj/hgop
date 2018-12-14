@@ -36,7 +36,8 @@ The ip addresss of the running instance changes with every commit to github, so 
 4. Click Console output
 5. Search for "Game API running at"
 ****
-## Folder structure
+
+## Final Folder structure
 ```
 .
 ├── Jenkinsfile
@@ -103,4 +104,17 @@ The ip addresss of the running instance changes with every commit to github, so 
     └── verify_environment.sh
 
 ```
+****
+## Datadog
+Api tests
+![ApiTest](apiTESTS.png)
+Capacity test
+![CapacityTest](capacitytest.png)
+Production
+![Production](production.png)
 
+Einnig er hægt að sjá datadog dashboard hér í eftirfarandi linkum.  
+[API-TEST](https://p.datadoghq.com/sb/885713020-4604981fc866c67e3a731a97ed0710bb)  
+[Capacity-Test](https://p.datadoghq.com/sb/885713020-efb5fa0f1833d05586554e4d5e9eb2d3)  
+[Productuion](https://p.datadoghq.com/sb/885713020-fb3595d463f91973149ea94a5adb7923)
+  ****
